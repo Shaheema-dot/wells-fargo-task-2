@@ -1,17 +1,16 @@
 package com.wellsfargo.counselor.entity;
 
+import jakarta.persistence.*;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import java.util.List;
+
+
 
 @Entity
-public class Advisor {
-
+public class Client {
     @Id
-    @GeneratedValue()
-    private long advisorId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long clientId;
 
     @Column(nullable = false)
     private String firstName;
@@ -28,11 +27,15 @@ public class Advisor {
     @Column(nullable = false)
     private String email;
 
-    protected Advisor() {
+    @ManyToOne
+    @JoinColumn(name = "advisor_id") // The foreign key column name in the 'address' table
+    private Advisor advisor;
+
+    protected Client() {
 
     }
 
-    public Advisor(String firstName, String lastName, String address, String phone, String email) {
+    public Client(String firstName, String lastName, String address, String phone, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -41,7 +44,7 @@ public class Advisor {
     }
 
     public Long getAdvisorId() {
-        return advisorId;
+        return clientId;
     }
 
     public String getFirstName() {
@@ -83,4 +86,5 @@ public class Advisor {
     public void setEmail(String email) {
         this.email = email;
     }
+
 }
