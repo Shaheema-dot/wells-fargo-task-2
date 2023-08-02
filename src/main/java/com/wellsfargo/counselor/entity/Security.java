@@ -21,10 +21,10 @@ public class Security {
     private String purchaseDate;
 
     @Column(nullable = false)
-    private String purchasePrice;
+    private Float purchasePrice;
 
     @Column(nullable = false)
-    private String quantity;
+    private Float quantity;
 
     @ManyToOne
     @JoinColumn(name = "portfolio_id") // The foreign key column name in the 'address' table
@@ -34,7 +34,8 @@ public class Security {
 
     }
 
-    public Security(String name, String category, String purchaseDate, String purchasePrice, String quantity) {
+    public Security(Portfolio portfolio, String name, String category, String purchaseDate, Float purchasePrice, Float quantity) {
+        this.portfolio = portfolio;
         this.name = name;
         this.category = category;
         this.purchaseDate = purchaseDate;
@@ -44,6 +45,14 @@ public class Security {
 
     public Long getSecurityId() {
         return securityId;
+    }
+
+    public Portfolio getPortfolio() {
+        return portfolio;
+    }
+
+    public void setPortfolio(Portfolio portfolio) {
+        this.portfolio = portfolio;
     }
 
     public String getName() {
@@ -70,19 +79,19 @@ public class Security {
         this.purchaseDate = purchaseDate;
     }
 
-    public String getPurchasePrice() {
+    public Float getPurchasePrice() {
         return purchasePrice;
     }
 
-    public void setPurchasePrice(String purchasePrice) {
+    public void setPurchasePrice(Float purchasePrice) {
         this.purchasePrice = purchasePrice;
     }
 
-    public String getQuantity() {
+    public Float getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(Float quantity) {
         this.quantity = quantity;
     }
 }
